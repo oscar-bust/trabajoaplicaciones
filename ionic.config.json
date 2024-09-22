@@ -1,0 +1,7 @@
+{
+  "name": "Miproyecto",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
