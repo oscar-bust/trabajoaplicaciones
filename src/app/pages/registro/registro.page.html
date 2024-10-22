@@ -66,6 +66,18 @@
           </ion-text>
         </ion-item>
 
+      
+        <ion-item>
+          <ion-label>Tipo de Usuario</ion-label>
+          <ion-select formControlName="tipoUsuario" placeholder="Seleccione">
+            <ion-select-option value="profesor">Profesor</ion-select-option>
+            <ion-select-option value="alumno">Alumno</ion-select-option>
+          </ion-select>
+          <ion-text color="danger" *ngIf="formularioRegistro.get('tipoUsuario')?.invalid && formularioRegistro.get('tipoUsuario')?.touched">
+            Debe seleccionar el tipo de usuario
+          </ion-text>
+        </ion-item>
+
         <br>
         <ion-button expand="full" (click)="guardar()">Registrarse</ion-button>
       </form>
@@ -80,4 +92,3 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
-

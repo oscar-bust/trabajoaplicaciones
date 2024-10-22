@@ -11,14 +11,13 @@ export class AloginPage implements OnInit {
   formularioLogin: FormGroup;
 
   constructor(
-    public fb: FormBuilder, 
+    public fb: FormBuilder,
     public alertController: AlertController,
     public navCtrl: NavController
   ) {
+    // Solo campos de correo y contraseña
     this.formularioLogin = this.fb.group({
-      'nombre': new FormControl("", Validators.required),
-      'apellido': new FormControl("", Validators.required),
-      'rut': new FormControl("", [Validators.required, Validators.pattern(/^(\d{1,2}\.\d{3}\.\d{3})-(\d|K)$/i)]), 
+      'email': new FormControl("", [Validators.required, Validators.email]),
       'password': new FormControl("", Validators.required)
     });
   }
@@ -38,13 +37,11 @@ export class AloginPage implements OnInit {
     const f = this.formularioLogin.value;
     const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
 
-    if (usuario.nombre === f.nombre &&
-        usuario.apellido === f.apellido &&
-        usuario.password === f.password &&
-        usuario.rut === f.rut) {
+    
+    if (usuario.email === f.email && usuario.password === f.password) {
       console.log('Ingresado');
       localStorage.setItem('ingresado', 'true');
-      this.navCtrl.navigateRoot('alumno');
+      this.navCtrl.navigateRoot('alumno'); 
     } else {
       const alert = await this.alertController.create({
         header: 'Datos incorrectos',

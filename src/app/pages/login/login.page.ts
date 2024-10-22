@@ -16,10 +16,8 @@ export class LoginPage implements OnInit {
               public navCtrl: NavController) {
     
     this.formularioLogin = this.fb.group({
-      nombre: new FormControl("", Validators.required),
-      apellido: new FormControl("", Validators.required),
       email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", Validators.required)
+      password: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(8)])
     });
   }
 
@@ -36,15 +34,27 @@ export class LoginPage implements OnInit {
     }
 
     const f = this.formularioLogin.value;
-    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
 
-    if (usuario.nombre === f.nombre &&
-        usuario.apellido === f.apellido &&
-        usuario.email === f.email &&
-        usuario.password === f.password) {
+    // Obtener la lista de usuarios registrados
+    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+
+    // Verificar que usuarios es un array
+    if (!Array.isArray(usuarios)) {
+      console.error("Los usuarios no son un array.");
+      return;
+    }
+
+    // Buscar un usuario válido
+    const usuarioValido = usuarios.find(usuario => 
+      usuario.email === f.email && usuario.password === f.password
+    );
+
+    if (usuarioValido) {
       console.log('Ingresado');
       localStorage.setItem('ingresado', 'true');
-      this.navCtrl.navigateRoot('profesor');
+      // Almacena el usuario actual
+      localStorage.setItem('usuarioActual', JSON.stringify(usuarioValido));
+      this.navCtrl.navigateRoot('profesor'); 
     } else {
       const alert = await this.alertController.create({
         header: 'Datos incorrectos',
@@ -59,11 +69,3 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 }
-
-
-
-
-
-
-
-

@@ -21,7 +21,8 @@ export class RegistroPage implements OnInit {
       email: new FormControl("", [Validators.required, Validators.email]),
       rut: new FormControl("", [Validators.required, this.rutValidator]),
       password: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(8)]),
-      confirmacionPassword: new FormControl("", Validators.required)
+      confirmacionPassword: new FormControl("", Validators.required),
+      tipoUsuario: new FormControl("", Validators.required)
     }, { validators: this.passwordsMatch.bind(this) });
   }
 
@@ -49,28 +50,26 @@ export class RegistroPage implements OnInit {
     }
 
     const f = this.formularioRegistro.value;
-
-    const usuario = {
+    const nuevoUsuario = {
       nombre: f.nombre,
       apellido: f.apellido,
       email: f.email,
       rut: f.rut,
-      password: f.password
+      password: f.password,
+      tipoUsuario: f.tipoUsuario
     };
 
-    localStorage.setItem('usuario', JSON.stringify(usuario));
+    // Obtener usuarios existentes
+    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    // Agregar el nuevo usuario al array
+    usuarios.push(nuevoUsuario);
+    // Guardar el array actualizado de usuarios
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    
+    // Redirigir a la página de inicio
+    this.navCtrl.navigateRoot('/home');
   }
 
   ngOnInit() {
   }
 }
-
-
-
-
-
- 
-
- 
-
-

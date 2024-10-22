@@ -11,6 +11,7 @@ export class AlumnoPage implements OnInit {
   apellido: string = '';
   correo: string = '';
   rut: string = '';
+  tipoUsuario: string = ''; // Agregar la propiedad tipoUsuario
 
   constructor(private navCtrl: NavController) { }
 
@@ -23,18 +24,18 @@ export class AlumnoPage implements OnInit {
       this.apellido = usuarioObj.apellido || '';
       this.correo = usuarioObj.email || '';  
       this.rut = usuarioObj.rut || '';
+      this.tipoUsuario = usuarioObj.tipoUsuario || 'Desconocido'; // Asignar el tipo de usuario
     } else {
       console.error('No se encontraron datos del alumno en localStorage.');
       this.nombre = 'No disponible';
       this.apellido = 'No disponible';
       this.correo = 'No disponible';
       this.rut = 'No disponible';
+      this.tipoUsuario = 'Desconocido'; // Manejar caso sin usuario
     }
   }
 
   logout() {
-    
     this.navCtrl.navigateRoot('/home');
   }
 }
-
