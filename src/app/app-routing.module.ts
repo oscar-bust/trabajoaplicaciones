@@ -20,10 +20,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
 
-  {
-    path: 'alogin',
-    loadChildren: () => import('./pages/alogin/alogin.module').then( m => m.AloginPageModule)
-  },
+  
+
   {
     path: 'profesor',
     loadChildren: () => import('./pages/profesor/profesor.module').then( m => m.ProfesorPageModule)
@@ -33,9 +31,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/restablecer/restablecer.module').then( m => m.RestablecerPageModule)
   },
   {
-    path: 'alumno',
-    loadChildren: () => import('./pages/alumno/alumno.module').then( m => m.AlumnoPageModule)
-  },
+    path: '**',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  }
+
  
 
 

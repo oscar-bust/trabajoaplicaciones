@@ -3,21 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { ReactiveFormsModule } from '@angular/forms';
+
+// Importaciones de Firebase desde @angular/fire/compat
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireModule } from '@angular/fire/compat'; // Importa AngularFireModule
+import { AngularFireModule } from '@angular/fire/compat';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-// Configuración de Firebase 
-const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_AUTH_DOMAIN',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_STORAGE_BUCKET',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID'
-};
+// Importa la configuración de Firebase desde environment.ts
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,12 +20,15 @@ const firebaseConfig = {
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ReactiveFormsModule, 
-    AngularFireModule.initializeApp(firebaseConfig), 
-    AngularFireAuthModule
+    ReactiveFormsModule,
+    // Inicializa Firebase usando AngularFireModule con compat
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule  // Módulo para autenticación con Firebase
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    // Otros proveedores si es necesario
+  ],
+  bootstrap: [AppComponent] // Asegúrate de tener esto también
 })
 export class AppModule {}
-
