@@ -23,12 +23,16 @@ const routes: Routes = [
     path: 'registro',
     loadChildren: () => import('./pages/registro/registro.module').then(m => m.RegistroPageModule) // Carga el módulo de la página de registro
   },
-  
+  {
+    path: 'recuperar',
+    loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
+  },
   
   {
     path: '**', // Captura cualquier ruta no definida
     redirectTo: 'home', // Redirige a la página de inicio
   },
+ 
 
  
 
