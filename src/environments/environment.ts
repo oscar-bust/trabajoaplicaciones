@@ -3,16 +3,21 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  firebaseConfig: {
-    apiKey: 'YOUR_API_KEY',
-    authDomain: 'YOUR_AUTH_DOMAIN',
-    projectId: 'YOUR_PROJECT_ID',
-    storageBucket: 'YOUR_STORAGE_BUCKET',
-    messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-    appId: 'YOUR_APP_ID'
-  }
+  production: false
 };
+
+// La configuración de Firebase se ha eliminado ya que no la usarás
+/*
+export const firebaseConfig = {
+  apiKey: '<your-api-key>',
+  authDomain: '<your-project-authdomain>',
+  databaseURL: '<your-database-URL>',
+  projectId: '<your-project-id>',
+  storageBucket: '<your-storage-bucket>',
+  messagingSenderId: '<your-messaging-sender-id>',
+  appId: "<your-app-id>",
+};
+*/
 
 /*
  * For easier debugging in development mode, you can import the following file

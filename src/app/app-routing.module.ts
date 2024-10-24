@@ -3,47 +3,37 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full' // Redirige a la página de inicio si la ruta está vacía
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) // Carga el módulo de la página de inicio
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule) // Carga el módulo de la página de login
+  },
+  {
+    path: 'profesor',
+    loadChildren: () => import('./pages/profesor/profesor.module').then(m => m.ProfesorPageModule) // Carga el módulo de la página de profesor
   },
   {
     path: 'registro',
-    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
+    loadChildren: () => import('./pages/registro/registro.module').then(m => m.RegistroPageModule) // Carga el módulo de la página de registro
   },
-
-  
-
-  {
-    path: 'profesor',
-    loadChildren: () => import('./pages/profesor/profesor.module').then( m => m.ProfesorPageModule)
-  },
-  {
-    path: 'restablecer',
-    loadChildren: () => import('./pages/restablecer/restablecer.module').then( m => m.RestablecerPageModule)
-  },
-  {
-    path: '**',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  }
-
  
-
-
+  {
+    path: '**', // Captura cualquier ruta no definida
+    redirectTo: 'home', // Redirige a la página de inicio
+  }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }) // Configuración de las rutas
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
