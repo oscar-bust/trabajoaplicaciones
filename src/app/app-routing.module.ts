@@ -27,7 +27,11 @@ const routes: Routes = [
   {
     path: '**', // Captura cualquier ruta no definida
     redirectTo: 'home', // Redirige a la página de inicio
+  },  {
+    path: 'rest',
+    loadChildren: () => import('./rest/rest.module').then( m => m.RestPageModule)
   }
+
 ];
 
 @NgModule({
