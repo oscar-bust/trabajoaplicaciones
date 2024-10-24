@@ -30,8 +30,15 @@ const routes: Routes = [
   
   {
     path: '**', // Captura cualquier ruta no definida
-    redirectTo: 'home', // Redirige a la página de inicio
+    redirectTo: 'error404', // Redirige a la página de inicio
   },
+  {
+    path: 'error404',
+    loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
+  },
+
+
+
  
 
  
