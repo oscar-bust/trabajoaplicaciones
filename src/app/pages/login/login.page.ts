@@ -35,16 +35,15 @@ export class LoginPage implements OnInit {
 
     const f = this.formularioLogin.value;
 
-    // Obtener la lista de usuarios registrados
+   
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
 
-    // Verificar que usuarios es un array
+   
     if (!Array.isArray(usuarios)) {
       console.error("Los usuarios no son un array.");
       return;
     }
 
-    // Buscar un usuario válido
     const usuarioValido = usuarios.find(usuario => 
       usuario.email === f.email && usuario.password === f.password
     );
@@ -52,7 +51,7 @@ export class LoginPage implements OnInit {
     if (usuarioValido) {
       console.log('Ingresado');
       localStorage.setItem('ingresado', 'true');
-      // Almacena el usuario actual
+     
       localStorage.setItem('usuarioActual', JSON.stringify(usuarioValido));
       this.navCtrl.navigateRoot('profesor'); 
     } else {
