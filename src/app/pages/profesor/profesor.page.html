@@ -27,18 +27,11 @@
     </footer>
   </ion-card>
 
-  <!-- Mostrar la lista de usuarios obtenidos de la API -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Usuarios de la API</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let usuario of usuarios">
-          <h2>{{ usuario.name }}</h2>
-          <p>{{ usuario.email }}</p>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  <ion-button expand="full" (click)="toggleAlumnos()">Lista de Alumnos</ion-button>
+
+  <ion-list *ngIf="mostrarAlumnos">
+    <ion-item *ngFor="let alumno of usuarios">
+      {{ alumno.name }} <!-- Cambia 'name' por la propiedad que desees mostrar -->
+    </ion-item>
+  </ion-list>
 </ion-content>

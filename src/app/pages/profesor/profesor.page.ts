@@ -4,7 +4,7 @@ import { Proveedor1Provider } from '../../../providers/proveedor1';
 
 @Component({
   selector: 'app-profesor',
-  templateUrl: './profesor.page.html', // Asegúrate de que este archivo exista
+  templateUrl: './profesor.page.html',
   styleUrls: ['./profesor.page.scss'],
 })
 export class ProfesorPage implements OnInit {
@@ -14,6 +14,7 @@ export class ProfesorPage implements OnInit {
   rut: string = '';
   tipoUsuario: string = '';
   usuarios: any[] = [];
+  mostrarAlumnos: boolean = false; // Variable para controlar la visibilidad de la lista de alumnos
 
   constructor(private navCtrl: NavController, public proveedor: Proveedor1Provider) {}
 
@@ -48,6 +49,10 @@ export class ProfesorPage implements OnInit {
           console.error('Error al obtener los datos:', error);
         }
       );
+  }
+
+  toggleAlumnos() {
+    this.mostrarAlumnos = !this.mostrarAlumnos; // Alternar la visibilidad de la lista
   }
 
   logout() {
