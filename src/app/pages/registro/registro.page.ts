@@ -34,7 +34,38 @@ export class RegistroPage implements OnInit {
 
   rutValidator(control: AbstractControl): ValidationErrors | null {
     const rutPattern = /^(\d{1,2})\.(\d{3})\.(\d{3})[-](\d|K)$/;
+    const value = control.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
+    if (value.length > 9) {
+      return { invalidRut: true }; // RUT no puede tener más de 9 dígitos
+    }
     return rutPattern.test(control.value) ? null : { invalidRut: true };
+  }
+
+  formatRUT(event: Event) {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.replace(/\D/g, ''); // Quitar caracteres no numéricos
+
+    // Limitar a 9 dígitos
+    if (value.length > 8) {
+      value = value.slice(0, 9); // Solo tomar los primeros 8 dígitos
+    }
+
+    if (value.length > 0) {
+      const rut = value.slice(0, -1);
+      const dv = value.slice(-1);
+      const formattedRUT = this.addDots(rut) + '-' + dv.toUpperCase();
+      input.value = formattedRUT; // Actualizar el valor del input
+      this.formularioRegistro.get('rut')?.setValue(formattedRUT); // Actualizar el FormControl
+    } else {
+      input.value = '';
+      this.formularioRegistro.get('rut')?.setValue(''); // Limpiar el FormControl
+    }
+  }
+
+  addDots(rut: string): string {
+    return rut.replace(/(\d{1,2})(\d{3})?(\d{3})?/, (match, p1, p2, p3) => {
+      return p1 + (p2 ? '.' + p2 : '') + (p3 ? '.' + p3 : '');
+    });
   }
 
   async guardar() {
@@ -61,6 +92,24 @@ export class RegistroPage implements OnInit {
 
     // Obtener usuarios existentes
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+
+    // Verificar si el RUT ya existe
+    const rutExists = usuarios.some((usuario: any) => usuario.rut === nuevoUsuario.rut);
+    if (rutExists) {
+      const alert = await this.alertController.create({
+        header: 'Usuario Existente',
+        message: 'Este RUT ya está registrado. Serás redirigido a la página de restablecimiento de contraseña.',
+        buttons: [{
+          text: 'Aceptar',
+          handler: () => {
+            this.navCtrl.navigateRoot('/recuperar'); // Redirigir a la página de restablecimiento
+          }
+        }]
+      });
+      await alert.present();
+      return;
+    }
+
     // Agregar el nuevo usuario al array
     usuarios.push(nuevoUsuario);
     // Guardar el array actualizado de usuarios

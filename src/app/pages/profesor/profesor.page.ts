@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular'; // Asegúrate de importar AlertController
 import { Proveedor1Provider } from '../../../providers/proveedor1';
 
 @Component({
@@ -16,7 +16,11 @@ export class ProfesorPage implements OnInit {
   usuarios: any[] = [];
   mostrarAlumnos: boolean = false; // Variable para controlar la visibilidad de la lista de alumnos
 
-  constructor(private navCtrl: NavController, public proveedor: Proveedor1Provider) {}
+  constructor(
+    private navCtrl: NavController,
+    public proveedor: Proveedor1Provider,
+    public alertController: AlertController // Inyectar AlertController
+  ) {}
 
   ngOnInit() {
     const usuario = localStorage.getItem('usuarioActual');
@@ -52,11 +56,17 @@ export class ProfesorPage implements OnInit {
   }
 
   toggleAlumnos() {
-    this.mostrarAlumnos = !this.mostrarAlumnos; // Alternar la visibilidad de la lista
+    this.mostrarAlumnos = !this.mostrarAlumnos; 
   }
 
-  logout() {
-    localStorage.removeItem('usuarioActual');
-    this.navCtrl.navigateRoot('/home');
+  async logout() {
+    localStorage.removeItem('usuarioActual'); // Elimina la información del usuario
+    const alert = await this.alertController.create({
+      header: 'Sesión cerrada',
+      message: 'Has cerrado sesión correctamente.',
+      buttons: ['Aceptar']
+    });
+    await alert.present(); // Muestra el mensaje de cierre de sesión
+    this.navCtrl.navigateRoot('/home'); // Redirige a la página de inicio
   }
 }

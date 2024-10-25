@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard'; // Asegúrate de que la ruta sea correcta
+
 
 const routes: Routes = [
   {
@@ -13,11 +15,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule) // Carga el módulo de la página de login
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
+    
   },
   {
     path: 'profesor',
-    loadChildren: () => import('./pages/profesor/profesor.module').then(m => m.ProfesorPageModule) // Carga el módulo de la página de profesor
+    loadChildren: () => import('./pages/profesor/profesor.module').then(m => m.ProfesorPageModule),
+    canActivate: [authGuard] 
   },
   {
     path: 'registro',
