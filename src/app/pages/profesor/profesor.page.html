@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Perfil </ion-title>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,7 +16,7 @@
       <ion-card-title>Detalles del usuario</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p><strong>Tipo de Usuario:</strong> {{ tipoUsuario }}</p> <!-- Línea añadida para mostrar el tipo de usuario -->
+      <p><strong>Tipo de Usuario:</strong> {{ tipoUsuario }}</p>
       <p><strong>Nombre:</strong> {{ nombre }}</p>
       <p><strong>Apellido:</strong> {{ apellido }}</p>
       <p><strong>Correo:</strong> {{ correo }}</p>
@@ -26,5 +26,19 @@
       <ion-button expand="full" (click)="logout()">Cerrar Sesión</ion-button>
     </footer>
   </ion-card>
-</ion-content>
 
+  <!-- Mostrar la lista de usuarios obtenidos de la API -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Usuarios de la API</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let usuario of usuarios">
+          <h2>{{ usuario.name }}</h2>
+          <p>{{ usuario.email }}</p>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
