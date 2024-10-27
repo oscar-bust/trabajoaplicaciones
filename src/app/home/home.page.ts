@@ -14,7 +14,7 @@ export class HomePage {
   async presentWelcomeToast() {
     const toast = await this.toastController.create({
       message: '¡Bienvenido a la aplicación!',
-      duration: 4000,  // duración ajustada a 4 segundos
+      duration: 1000,  
       position: 'top',
     });
     toast.present();

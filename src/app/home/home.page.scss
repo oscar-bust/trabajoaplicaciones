@@ -1,16 +1,16 @@
 ion-content {
   display: flex;
-  justify-content: center; /* Centrado vertical */
-  align-items: center; /* Centrado horizontal */
-  height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
 }
 
 .button-container {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Espacio entre los botones */
-  width: 80%; /* Ajusta el ancho de los botones */
-  max-width: 300px; /* Tamaño máximo para pantallas grandes */
-  padding-top: 20vh; /* Mueve los botones un poco hacia abajo */
-  margin-left: 10%; /* Mueve el contenedor un poco hacia la derecha */
+  gap: 20px; 
+  width: 80%; 
+  max-width: 300px; 
+  padding-top: 20vh; 
+  margin-left: 10%; 
 }
