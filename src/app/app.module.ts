@@ -22,8 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Proveedor1Provider
     
-    // Otros proveedores si es necesario
+    
   ],
-  bootstrap: [AppComponent] // Asegúrate de tener esto también
+  bootstrap: [AppComponent] 
 })
 export class AppModule {}

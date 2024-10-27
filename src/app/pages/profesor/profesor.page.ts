@@ -60,13 +60,13 @@ export class ProfesorPage implements OnInit {
   }
 
   async logout() {
-    localStorage.removeItem('usuarioActual'); // Elimina la información del usuario
+    localStorage.removeItem('usuarioActual'); 
     const alert = await this.alertController.create({
       header: 'Sesión cerrada',
       message: 'Has cerrado sesión correctamente.',
       buttons: ['Aceptar']
     });
-    await alert.present(); // Muestra el mensaje de cierre de sesión
-    this.navCtrl.navigateRoot('/home'); // Redirige a la página de inicio
+    await alert.present(); 
+    this.navCtrl.navigateRoot('/home'); 
   }
 }

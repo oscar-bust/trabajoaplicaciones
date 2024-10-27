@@ -1,9 +1,9 @@
 import { CanActivateFn } from '@angular/router';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  const isLoggedIn = !!localStorage.getItem('usuarioActual'); // Verifica si el usuario está autenticado
+  const isLoggedIn = !!localStorage.getItem('usuarioActual'); 
 
-  // Usa route.routeConfig para acceder a la ruta configurada
+
   const path = route.routeConfig ? route.routeConfig.path : 'ruta desconocida';
   console.log('Verificando acceso a: usuario');
 
@@ -11,9 +11,9 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   if (!isLoggedIn) {
     console.log('Redirigiendo a la página de login');
-    return false; // Evita que acceda a la ruta
+    return false;
   }
 
   console.log('Acceso permitido');
-  return true; // Permite el acceso a la ruta
+  return true; 
 };

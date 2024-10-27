@@ -32,16 +32,16 @@ export class RecuperarPage implements OnInit {
 
     const email = this.formularioRecuperar.value.email;
 
-    // Obtener la lista de usuarios desde localStorage
+   
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
 
-    // Verificar que el correo electrónico exista
+   
     const usuarioEncontrado = usuarios.find((usuario: { email: string }) => usuario.email === email);
 
     if (usuarioEncontrado) {
       this.mensaje = 'Se ha enviado un correo de recuperación de contraseña a ' + email;
 
-      // Redirigir al home después de mostrar el mensaje
+     
       setTimeout(() => {
         this.navCtrl.navigateRoot('/home');
       }, 2000);

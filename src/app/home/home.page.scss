@@ -1,27 +1,16 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+ion-content {
+  display: flex;
+  justify-content: center; /* Centrado vertical */
+  align-items: center; /* Centrado horizontal */
+  height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio entre los botones */
+  width: 80%; /* Ajusta el ancho de los botones */
+  max-width: 300px; /* Tamaño máximo para pantallas grandes */
+  padding-top: 20vh; /* Mueve los botones un poco hacia abajo */
+  margin-left: 10%; /* Mueve el contenedor un poco hacia la derecha */
 }

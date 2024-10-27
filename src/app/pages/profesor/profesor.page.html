@@ -27,13 +27,13 @@
     </footer>
   </ion-card>
 
-  <div style="margin: 20px 0;"></div> <!-- Espaciado entre elementos -->
+  <div style="margin: 20px 0;"></div> 
 
   <ion-button expand="full" (click)="toggleAlumnos()">Lista de Alumnos</ion-button>
 
   <ion-list *ngIf="mostrarAlumnos">
     <ion-item *ngFor="let alumno of usuarios">
-      {{ alumno.name }} <!-- Cambia 'name' por la propiedad que desees mostrar -->
+      {{ alumno.name }} 
     </ion-item>
   </ion-list>
 </ion-content>

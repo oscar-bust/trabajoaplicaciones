@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class Proveedor1Provider {
-  private apiUrl = 'https://jsonplaceholder.typicode.com/users'; // URL de la API
+  private apiUrl = 'https://jsonplaceholder.typicode.com/users'; 
 
   constructor(private http: HttpClient) {}
 
-  obtenerDatos(): Observable<any[]> { // Ajusta el tipo si conoces la estructura
-    return this.http.get<any[]>(this.apiUrl); // Realiza la solicitud GET
+  obtenerDatos(): Observable<any[]> { 
+    return this.http.get<any[]>(this.apiUrl); 
   }
 }

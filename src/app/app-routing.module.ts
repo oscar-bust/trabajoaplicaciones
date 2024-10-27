@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard'; // Asegúrate de que la ruta sea correcta
+import { authGuard } from './guards/auth.guard'; // 
 
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full' // Redirige a la página de inicio si la ruta está vacía
+    pathMatch: 'full' 
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) // Carga el módulo de la página de inicio
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) 
   },
   {
     path: 'login',
@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'registro',
-    loadChildren: () => import('./pages/registro/registro.module').then(m => m.RegistroPageModule) // Carga el módulo de la página de registro
+    loadChildren: () => import('./pages/registro/registro.module').then(m => m.RegistroPageModule) 
   },
   {
     path: 'recuperar',
@@ -33,8 +33,8 @@ const routes: Routes = [
   },
   
   {
-    path: '**', // Captura cualquier ruta no definida
-    redirectTo: 'error404', // Redirige a la página de inicio
+    path: '**', 
+    redirectTo: 'error404', 
   },
   {
     path: 'error404',
@@ -52,7 +52,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }) // Configuración de las rutas
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }) 
   ],
   exports: [RouterModule]
 })

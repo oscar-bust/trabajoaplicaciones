@@ -10,7 +10,7 @@ export class Error404Page {
 
   constructor(private router: Router) {}
 
-  // Función para redirigir al home
+ 
   goHome() {
     this.router.navigate(['/home']);
   }

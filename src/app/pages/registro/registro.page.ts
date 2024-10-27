@@ -34,31 +34,31 @@ export class RegistroPage implements OnInit {
 
   rutValidator(control: AbstractControl): ValidationErrors | null {
     const rutPattern = /^(\d{1,2})\.(\d{3})\.(\d{3})[-](\d|K)$/;
-    const value = control.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
+    const value = control.value.replace(/\D/g, ''); 
     if (value.length > 9) {
-      return { invalidRut: true }; // RUT no puede tener más de 9 dígitos
+      return { invalidRut: true }; 
     }
     return rutPattern.test(control.value) ? null : { invalidRut: true };
   }
 
   formatRUT(event: Event) {
     const input = event.target as HTMLInputElement;
-    let value = input.value.replace(/\D/g, ''); // Quitar caracteres no numéricos
+    let value = input.value.replace(/\D/g, ''); 
 
     // Limitar a 9 dígitos
     if (value.length > 8) {
-      value = value.slice(0, 9); // Solo tomar los primeros 8 dígitos
+      value = value.slice(0, 9); 
     }
 
     if (value.length > 0) {
       const rut = value.slice(0, -1);
       const dv = value.slice(-1);
       const formattedRUT = this.addDots(rut) + '-' + dv.toUpperCase();
-      input.value = formattedRUT; // Actualizar el valor del input
-      this.formularioRegistro.get('rut')?.setValue(formattedRUT); // Actualizar el FormControl
+      input.value = formattedRUT; 
+      this.formularioRegistro.get('rut')?.setValue(formattedRUT); 
     } else {
       input.value = '';
-      this.formularioRegistro.get('rut')?.setValue(''); // Limpiar el FormControl
+      this.formularioRegistro.get('rut')?.setValue(''); 
     }
   }
 
@@ -90,10 +90,9 @@ export class RegistroPage implements OnInit {
       tipoUsuario: f.tipoUsuario
     };
 
-    // Obtener usuarios existentes
+   
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
 
-    // Verificar si el RUT ya existe
     const rutExists = usuarios.some((usuario: any) => usuario.rut === nuevoUsuario.rut);
     if (rutExists) {
       const alert = await this.alertController.create({
@@ -102,7 +101,7 @@ export class RegistroPage implements OnInit {
         buttons: [{
           text: 'Aceptar',
           handler: () => {
-            this.navCtrl.navigateRoot('/recuperar'); // Redirigir a la página de restablecimiento
+            this.navCtrl.navigateRoot('/recuperar'); 
           }
         }]
       });
@@ -110,12 +109,12 @@ export class RegistroPage implements OnInit {
       return;
     }
 
-    // Agregar el nuevo usuario al array
+ 
     usuarios.push(nuevoUsuario);
-    // Guardar el array actualizado de usuarios
+
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
     
-    // Redirigir a la página de inicio
+   
     this.navCtrl.navigateRoot('/home');
   }
 
