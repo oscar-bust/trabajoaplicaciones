@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular'; // Asegúrate de importar AlertController
+import { NavController, AlertController } from '@ionic/angular'; 
 import { Proveedor1Provider } from '../../../providers/proveedor1';
 
 @Component({
@@ -14,12 +14,12 @@ export class ProfesorPage implements OnInit {
   rut: string = '';
   tipoUsuario: string = '';
   usuarios: any[] = [];
-  mostrarAlumnos: boolean = false; // Variable para controlar la visibilidad de la lista de alumnos
+  mostrarAlumnos: boolean = false; 
 
   constructor(
     private navCtrl: NavController,
     public proveedor: Proveedor1Provider,
-    public alertController: AlertController // Inyectar AlertController
+    public alertController: AlertController 
   ) {}
 
   ngOnInit() {
