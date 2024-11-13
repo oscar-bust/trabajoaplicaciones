@@ -31,6 +31,12 @@
 
   <ion-button expand="full" (click)="toggleAlumnos()">Lista de Alumnos</ion-button>
 
+  <ion-button (click)="mostrarOpciones()">
+    <!-- El nombre del botón cambia dependiendo del tipo de usuario -->
+    {{ tipoUsuario === 'profesor' ? 'Escanear Código QR' : 'Generar Código QR' }}
+  </ion-button>
+  
+
   <ion-list *ngIf="mostrarAlumnos">
     <ion-item *ngFor="let alumno of usuarios">
       {{ alumno.name }} 

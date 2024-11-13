@@ -31,7 +31,15 @@ const routes: Routes = [
     path: 'recuperar',
     loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
   },
-  
+  {
+    path: 'qrscan',
+    loadChildren: () => import('./pages/qrscan/qrscan.module').then( m => m.QrscanPageModule)
+  },
+  {
+    path: 'generateqr',
+    loadChildren: () => import('./pages/generateqr/generateqr.module').then( m => m.GenerateqrPageModule)
+  },
+ 
   {
     path: '**', 
     redirectTo: 'error404', 
@@ -40,6 +48,10 @@ const routes: Routes = [
     path: 'error404',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
   },
+ 
+
+
+
 
 
 

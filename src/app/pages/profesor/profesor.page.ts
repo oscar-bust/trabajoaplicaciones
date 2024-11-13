@@ -12,7 +12,7 @@ export class ProfesorPage implements OnInit {
   apellido: string = '';
   correo: string = '';
   rut: string = '';
-  tipoUsuario: string = '';
+  tipoUsuario: string | null = null;
   usuarios: any[] = [];
   mostrarAlumnos: boolean = false; 
 
@@ -23,14 +23,13 @@ export class ProfesorPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const usuario = localStorage.getItem('usuarioActual');
-
-    if (usuario) {
-      const usuarioObj = JSON.parse(usuario);
-      this.nombre = usuarioObj.nombre || '';
-      this.apellido = usuarioObj.apellido || '';
-      this.correo = usuarioObj.email || '';
-      this.rut = usuarioObj.rut || '';
+    const usuarioData = localStorage.getItem('usuarioActual');
+    if (usuarioData) {
+      const usuarioObj = JSON.parse(usuarioData);
+      this.nombre = usuarioObj.nombre || 'No disponible';
+      this.apellido = usuarioObj.apellido || 'No disponible';
+      this.correo = usuarioObj.email || 'No disponible';
+      this.rut = usuarioObj.rut || 'No disponible';
       this.tipoUsuario = usuarioObj.tipoUsuario || 'Desconocido';
     } else {
       console.error('No se encontraron datos del usuario en localStorage.');
@@ -41,19 +40,27 @@ export class ProfesorPage implements OnInit {
       this.tipoUsuario = 'Desconocido';
     }
   }
-
   ionViewWillEnter() {
-    this.proveedor.obtenerDatos()
-      .subscribe(
-        (data) => {
-          this.usuarios = data;
-          console.log('Usuarios obtenidos:', this.usuarios);
-        },
-        (error) => {
-          console.error('Error al obtener los datos:', error);
-        }
-      );
+    this.proveedor.obtenerDatos().subscribe(
+      (data) => {
+        this.usuarios = data;
+        console.log('Usuarios obtenidos:', this.usuarios);
+      },
+      (error) => {
+        console.error('Error al obtener los datos:', error);
+      }
+    );
   }
+
+  mostrarOpciones() {
+    console.log('Tipo de usuario:', this.tipoUsuario);  // Verifica el valor
+    if (this.tipoUsuario === 'profesor') {
+      this.navCtrl.navigateForward('/qrscan');
+    } else if (this.tipoUsuario === 'alumno') {
+      this.navCtrl.navigateForward('/generateqr');
+    }
+  }
+  
 
   toggleAlumnos() {
     this.mostrarAlumnos = !this.mostrarAlumnos; 

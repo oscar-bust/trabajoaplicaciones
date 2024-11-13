@@ -11,10 +11,11 @@ export class RegistroPage implements OnInit {
 
   formularioRegistro: FormGroup;
 
-  constructor(public fb: FormBuilder,
-              private alertController: AlertController,
-              public navCtrl: NavController) {
-    
+  constructor(
+    public fb: FormBuilder,
+    private alertController: AlertController,
+    public navCtrl: NavController
+  ) {
     this.formularioRegistro = this.fb.group({
       nombre: new FormControl("", Validators.required),
       apellido: new FormControl("", Validators.required),
@@ -25,6 +26,8 @@ export class RegistroPage implements OnInit {
       tipoUsuario: new FormControl("", Validators.required)
     }, { validators: this.passwordsMatch.bind(this) });
   }
+
+  ngOnInit() {}
 
   passwordsMatch(group: FormGroup) {
     const password = group.get('password')?.value;
@@ -43,29 +46,29 @@ export class RegistroPage implements OnInit {
 
   formatRUT(event: Event) {
     const input = event.target as HTMLInputElement;
-    let value = input.value.replace(/\D/g, ''); 
+    let value = input.value.replace(/\D/g, '');
 
-    // Limitar a 9 dígitos
+    if (value === '') {
+      this.formularioRegistro.controls['rut'].setValue(''); 
+      return; 
+    }
+
     if (value.length > 8) {
       value = value.slice(0, 9); 
     }
 
-    if (value.length > 0) {
-      const rut = value.slice(0, -1);
-      const dv = value.slice(-1);
-      const formattedRUT = this.addDots(rut) + '-' + dv.toUpperCase();
-      input.value = formattedRUT; 
-      this.formularioRegistro.get('rut')?.setValue(formattedRUT); 
-    } else {
-      input.value = '';
-      this.formularioRegistro.get('rut')?.setValue(''); 
+    if (value.length > 1) {
+      value = value.slice(0, value.length - 1) + '-' + value.slice(-1);
     }
-  }
+    if (value.length > 4) {
+      value = value.slice(0, value.length - 5) + '.' + value.slice(-5);
+    }
+    if (value.length > 7) {
+      value = value.slice(0, value.length - 9) + '.' + value.slice(-9);
+    }
 
-  addDots(rut: string): string {
-    return rut.replace(/(\d{1,2})(\d{3})?(\d{3})?/, (match, p1, p2, p3) => {
-      return p1 + (p2 ? '.' + p2 : '') + (p3 ? '.' + p3 : '');
-    });
+    input.value = value;
+    this.formularioRegistro.controls['rut'].setValue(value);
   }
 
   async guardar() {
@@ -75,7 +78,6 @@ export class RegistroPage implements OnInit {
         message: 'Tienes que llenar todos los datos correctamente.',
         buttons: ['Aceptar']
       });
-
       await alert.present();
       return;
     }
@@ -90,10 +92,9 @@ export class RegistroPage implements OnInit {
       tipoUsuario: f.tipoUsuario
     };
 
-   
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-
     const rutExists = usuarios.some((usuario: any) => usuario.rut === nuevoUsuario.rut);
+    
     if (rutExists) {
       const alert = await this.alertController.create({
         header: 'Usuario Existente',
@@ -109,15 +110,10 @@ export class RegistroPage implements OnInit {
       return;
     }
 
- 
     usuarios.push(nuevoUsuario);
-
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
     
-   
+    // Redirigir al home después del registro
     this.navCtrl.navigateRoot('/home');
-  }
-
-  ngOnInit() {
   }
 }
