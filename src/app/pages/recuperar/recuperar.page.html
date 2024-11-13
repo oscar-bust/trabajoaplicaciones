@@ -5,34 +5,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Ingresa tu Correo Electrónico</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <form [formGroup]="formularioRecuperar" (ngSubmit)="enviarCorreo()">
-        <ion-item>
-          <ion-label position="floating">Correo Electrónico</ion-label>
-          <ion-input formControlName="email" type="email"></ion-input>
-          <ion-text color="danger" *ngIf="formularioRecuperar.get('email')?.invalid && formularioRecuperar.get('email')?.touched">
-            Ingresa un correo electrónico válido
-          </ion-text>
-        </ion-item>
-        <ion-button expand="full" type="submit" [disabled]="formularioRecuperar.invalid">Enviar</ion-button>
-      </form>
-      <div *ngIf="mensaje" style="margin-top: 10px;">
-        <ion-card color="light">
-          <ion-card-content>{{ mensaje }}</ion-card-content>
-        </ion-card>
-      </div>
-    </ion-card-content>
-  </ion-card>
+  <form (ngSubmit)="onSubmit()">
+    <!-- Campo de correo electrónico -->
+    <ion-item>
+      <ion-label position="floating">Correo Electrónico</ion-label>
+      <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+    </ion-item>
 
-  <ion-footer>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-button [routerLink]="['/home']">Volver al Inicio</ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-footer>
+    <!-- Campo de nueva contraseña -->
+    <ion-item>
+      <ion-label position="floating">Nueva Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="newPassword" name="newPassword" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit">Cambiar Contraseña</ion-button>
+  </form>
 </ion-content>

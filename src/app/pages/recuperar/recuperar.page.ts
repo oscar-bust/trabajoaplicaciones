@@ -1,57 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AlertController, NavController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';  
 
 @Component({
   selector: 'app-recuperar',
   templateUrl: './recuperar.page.html',
   styleUrls: ['./recuperar.page.scss'],
 })
-export class RecuperarPage implements OnInit {
-  formularioRecuperar: FormGroup;
-  mensaje: string | null = null;
+export class RecuperarPage {
 
-  constructor(private alertController: AlertController, private navCtrl: NavController) {
-    this.formularioRecuperar = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-    });
-  }
+  email: string = '';  
+  newPassword: string = '';  
 
-  ngOnInit() {}
+  constructor(private router: Router) { }  
 
-  async enviarCorreo() {
-    if (this.formularioRecuperar.invalid) {
-      const alert = await this.alertController.create({
-        header: 'Datos incompletos',
-        message: 'Tienes que ingresar un correo electrónico válido.',
-        buttons: ['Aceptar']
-      });
-      await alert.present();
-      return;
-    }
+  onSubmit() {
+    
+    const users = JSON.parse(localStorage.getItem('usuarios') || '[]');
 
-    const email = this.formularioRecuperar.value.email;
+    
+    const user = users.find((u: any) => u.email === this.email);
 
-   
-    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-
-   
-    const usuarioEncontrado = usuarios.find((usuario: { email: string }) => usuario.email === email);
-
-    if (usuarioEncontrado) {
-      this.mensaje = 'Se ha enviado un correo de recuperación de contraseña a ' + email;
-
+    if (user) {
      
-      setTimeout(() => {
-        this.navCtrl.navigateRoot('/home');
-      }, 2000);
+      user.password = this.newPassword;
+      
+      
+      localStorage.setItem('usuarios', JSON.stringify(users));
+
+      
+      alert('Contraseña actualizada con éxito');
+
+      
+      this.email = '';  
+      this.newPassword = '';
+
+    
+      this.router.navigate(['/login']);
     } else {
-      const alert = await this.alertController.create({
-        header: 'Correo no encontrado',
-        message: 'No se encontró un usuario registrado con ese correo electrónico.',
-        buttons: ['Aceptar'],
-      });
-      await alert.present();
+     
+      alert('Correo no registrado');
     }
   }
 }
