@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard'; // 
-
+import { AuthGuard } from './guards/auth.guard'; // Importa el guard que acabas de crear
 
 const routes: Routes = [
   {
@@ -16,12 +15,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
-    
   },
   {
     path: 'profesor',
     loadChildren: () => import('./pages/profesor/profesor.module').then(m => m.ProfesorPageModule),
-    canActivate: [authGuard] 
+    canActivate: [AuthGuard],  // Aplica el AuthGuard para proteger esta ruta
   },
   {
     path: 'registro',
@@ -39,7 +37,6 @@ const routes: Routes = [
     path: 'generateqr',
     loadChildren: () => import('./pages/generateqr/generateqr.module').then( m => m.GenerateqrPageModule)
   },
- 
   {
     path: '**', 
     redirectTo: 'error404', 
@@ -47,19 +44,7 @@ const routes: Routes = [
   {
     path: 'error404',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
-  },
- 
-
-
-
-
-
-
- 
-
- 
-
-
+  }
 ];
 
 @NgModule({
