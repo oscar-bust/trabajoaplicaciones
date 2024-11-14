@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'profesor',
     loadChildren: () => import('./pages/profesor/profesor.module').then(m => m.ProfesorPageModule),
-    canActivate: [AuthGuard],  // Aplica el AuthGuard para proteger esta ruta
+    canActivate: [AuthGuard],  
   },
   {
     path: 'registro',
@@ -31,11 +31,13 @@ const routes: Routes = [
   },
   {
     path: 'qrscan',
-    loadChildren: () => import('./pages/qrscan/qrscan.module').then( m => m.QrscanPageModule)
+    loadChildren: () => import('./pages/qrscan/qrscan.module').then( m => m.QrscanPageModule),
+    canActivate: [AuthGuard],  
   },
   {
     path: 'generateqr',
-    loadChildren: () => import('./pages/generateqr/generateqr.module').then( m => m.GenerateqrPageModule)
+    loadChildren: () => import('./pages/generateqr/generateqr.module').then( m => m.GenerateqrPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: '**', 
