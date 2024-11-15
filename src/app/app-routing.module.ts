@@ -40,13 +40,19 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'lista-alumnos',
+    loadChildren: () => import('./pages/lista-alumnos/lista-alumnos.module').then( m => m.ListaAlumnosPageModule)
+  },
+  {
     path: '**', 
     redirectTo: 'error404', 
   },
   {
     path: 'error404',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
-  }
+  },
+
+
 ];
 
 @NgModule({

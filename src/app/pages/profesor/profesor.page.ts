@@ -40,29 +40,27 @@ export class ProfesorPage implements OnInit {
       this.tipoUsuario = 'Desconocido';
     }
   }
-
   ionViewWillEnter() {
     this.proveedor.obtenerDatos().subscribe(
       (data) => {
-        
-        this.usuarios = data.filter((usuario: any) => usuario.tipoUsuario === 'alumno');
-        console.log('Usuarios filtrados (solo alumnos):', this.usuarios);
+        this.usuarios = data;
+        console.log('Usuarios obtenidos:', this.usuarios);
       },
       (error) => {
         console.error('Error al obtener los datos:', error);
       }
     );
   }
-  
 
   mostrarOpciones() {
-    console.log('Tipo de usuario:', this.tipoUsuario);
+    console.log('Tipo de usuario:', this.tipoUsuario);  // Verifica el valor
     if (this.tipoUsuario === 'profesor') {
       this.navCtrl.navigateForward('/qrscan');
     } else if (this.tipoUsuario === 'alumno') {
       this.navCtrl.navigateForward('/generateqr');
     }
   }
+  
 
   toggleAlumnos() {
     this.mostrarAlumnos = !this.mostrarAlumnos; 
