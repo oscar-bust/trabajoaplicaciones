@@ -55,9 +55,9 @@ export class ProfesorPage implements OnInit {
   mostrarOpciones() {
     console.log('Tipo de usuario:', this.tipoUsuario);  // Verifica el valor
     if (this.tipoUsuario === 'profesor') {
-      this.navCtrl.navigateForward('/qrscan');
-    } else if (this.tipoUsuario === 'alumno') {
       this.navCtrl.navigateForward('/generateqr');
+    } else if (this.tipoUsuario === 'alumno') {
+      this.navCtrl.navigateForward('/qrscan');
     }
   }
   

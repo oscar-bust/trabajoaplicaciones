@@ -10,6 +10,9 @@
   
     <qrcode *ngIf="qrValue" [qrdata]="qrValue" [width]="256" class="qr-code"></qrcode>
   </div>
+  <ion-buttons slot="start">
+    <ion-button [routerLink]="['/profesor']">⬅️Volver al Inicio</ion-button>
+  </ion-buttons>
 
 
   <ion-button expand="full" (click)="generarQR()">Generar QR</ion-button>

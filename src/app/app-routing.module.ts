@@ -29,11 +29,7 @@ const routes: Routes = [
     path: 'recuperar',
     loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
   },
-  {
-    path: 'qrscan',
-    loadChildren: () => import('./pages/qrscan/qrscan.module').then( m => m.QrscanPageModule),
-    canActivate: [AuthGuard],  
-  },
+
   {
     path: 'generateqr',
     loadChildren: () => import('./pages/generateqr/generateqr.module').then( m => m.GenerateqrPageModule),

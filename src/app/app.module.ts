@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
+
+
 @NgModule({
   declarations: [AppComponent],
   
@@ -16,11 +18,12 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
+   
     HttpClientModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Proveedor1Provider
+    Proveedor1Provider, 
     
     
   ],
