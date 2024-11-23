@@ -40,6 +40,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/lista-alumnos/lista-alumnos.module').then( m => m.ListaAlumnosPageModule)
   },
   {
+    path: 'scan',
+    loadChildren: () => import('./pages/scan/scan.module').then( m => m.ScanPageModule)
+  },
+  
+  {
     path: '**', 
     redirectTo: 'error404', 
   },
@@ -47,6 +52,10 @@ const routes: Routes = [
     path: 'error404',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
   },
+ 
+
+ 
+
 
 
 ];

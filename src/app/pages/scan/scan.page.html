@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Escáner QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Botón para activar el escáner -->
+  <ion-button expand="full" (click)="toggleScanner()">Escanear</ion-button>
+
+  <!-- Contenedor para el escáner, solo se muestra cuando el escáner está activado -->
+  <div *ngIf="isScannerActive">
+    <zxing-scanner
+      [formats]="formats"
+      (scanSuccess)="handleQrCodeResult($event)">
+    </zxing-scanner>
+  </div>
+
+ 
+  <div *ngIf="scannedResult; else scanQr">
+    <p>Resultado del código QR: {{ scannedResult }}</p>
+  </div>
+  
+  <ng-template #scanQr>
+    <p>Escanea un código QR.</p>
+  </ng-template>
+
+
+  <ion-button expand="full" color="primary" (click)="goToProfesorPage()">Ir a la página Profesor</ion-button>
+</ion-content>

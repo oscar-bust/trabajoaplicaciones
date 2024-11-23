@@ -7,26 +7,22 @@ import { Proveedor1Provider } from '../providers/proveedor1';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { ZXingScannerModule } from '@zxing/ngx-scanner';  // Importa el módulo aquí
 
 @NgModule({
   declarations: [AppComponent],
-  
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
-   
-    HttpClientModule
+    HttpClientModule,
+    ZXingScannerModule  // Asegúrate de que este módulo esté importado
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Proveedor1Provider, 
-    
-    
+    Proveedor1Provider,
   ],
-  bootstrap: [AppComponent] 
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
