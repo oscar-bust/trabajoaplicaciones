@@ -61,7 +61,7 @@ export class ProfesorPage implements OnInit {
     if (this.tipoUsuario === 'profesor') {
       this.navCtrl.navigateForward('/generateqr');
     } else if (this.tipoUsuario === 'alumno') {
-      this.navCtrl.navigateForward('/qrscan');
+      this.navCtrl.navigateForward('/scan');
     }
   }
 
