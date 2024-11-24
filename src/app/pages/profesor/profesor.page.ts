@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular'; 
+import { NavController, AlertController } from '@ionic/angular';
 import { Proveedor1Provider } from '../../../providers/proveedor1';
 
 @Component({
@@ -14,15 +14,16 @@ export class ProfesorPage implements OnInit {
   rut: string = '';
   tipoUsuario: string | null = null;
   usuarios: any[] = [];
-  mostrarAlumnos: boolean = false; 
+  mostrarAlumnos: boolean = false;
 
   constructor(
     private navCtrl: NavController,
     public proveedor: Proveedor1Provider,
-    public alertController: AlertController 
+    public alertController: AlertController
   ) {}
 
   ngOnInit() {
+    // Obtener los datos del usuario actual desde el localStorage
     const usuarioData = localStorage.getItem('usuarioActual');
     if (usuarioData) {
       const usuarioObj = JSON.parse(usuarioData);
@@ -40,40 +41,60 @@ export class ProfesorPage implements OnInit {
       this.tipoUsuario = 'Desconocido';
     }
   }
+
   ionViewWillEnter() {
-    this.proveedor.obtenerDatos().subscribe(
-      (data) => {
-        this.usuarios = data;
+    // Llamada al servicio para obtener los datos de los usuarios
+    this.proveedor.obtenerUsuarios().subscribe(
+      (data: any[]) => {
+        this.usuarios = data; // Asignamos los usuarios a la propiedad
         console.log('Usuarios obtenidos:', this.usuarios);
       },
-      (error) => {
+      (error: any) => {
         console.error('Error al obtener los datos:', error);
       }
     );
   }
+  
 
   mostrarOpciones() {
-    console.log('Tipo de usuario:', this.tipoUsuario);  // Verifica el valor
+    // Dependiendo del tipo de usuario, redirige a una página diferente
     if (this.tipoUsuario === 'profesor') {
       this.navCtrl.navigateForward('/generateqr');
     } else if (this.tipoUsuario === 'alumno') {
       this.navCtrl.navigateForward('/qrscan');
     }
   }
-  
 
   toggleAlumnos() {
-    this.mostrarAlumnos = !this.mostrarAlumnos; 
+    // Muestra u oculta la lista de alumnos
+    this.mostrarAlumnos = !this.mostrarAlumnos;
   }
 
   async logout() {
-    localStorage.removeItem('usuarioActual'); 
+    // Cierra sesión y redirige al home
+    localStorage.removeItem('usuarioActual');
     const alert = await this.alertController.create({
       header: 'Sesión cerrada',
       message: 'Has cerrado sesión correctamente.',
-      buttons: ['Aceptar']
+      buttons: ['Aceptar'],
     });
-    await alert.present(); 
-    this.navCtrl.navigateRoot('/home'); 
+    await alert.present();
+    this.navCtrl.navigateRoot('/home');
+  }
+
+  // Método para crear una clase/sección, solo visible para el tipo de usuario "profesor"
+  crearClase() {
+    if (this.tipoUsuario === 'profesor') {
+      this.navCtrl.navigateForward('/crear-seccion'); // Navega a la página de creación de clases
+    } else if (this.tipoUsuario === 'alumno') {
+      this.navCtrl.navigateForward('/clase');  // Redirige a la página de clases disponibles para alumnos
+    }
+  }
+
+  // Método para ver clases disponibles, solo visible si el tipo de usuario es 'alumno'
+  verClasesDisponibles() {
+    if (this.tipoUsuario === 'alumno') {
+      this.navCtrl.navigateForward('/clase'); // Redirige a la página de clases
+    }
   }
 }

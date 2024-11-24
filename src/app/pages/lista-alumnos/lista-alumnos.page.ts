@@ -20,18 +20,20 @@ export class ListaAlumnosPage implements OnInit {
   }
 
   cargarAlumnos() {
-    this.proveedor.obtenerDatos().subscribe(
-      (data) => {
+    this.proveedor.obtenerUsuarios().subscribe(
+      (data: any[]) => {  // Especifico el tipo para 'data' como un array de 'any'
         if (Array.isArray(data) && data.length > 0) {
+          // Filtramos solo los usuarios de tipo 'alumno'
           this.usuarios = data.filter((usuario: any) => usuario.tipoUsuario === 'alumno');
           console.log('Usuarios obtenidos:', this.usuarios);
         } else {
           console.error('No se encontraron datos de usuarios');
         }
       },
-      (error) => {
+      (error: any) => {  // Especifico el tipo para 'error' como 'any'
         console.error('Error al obtener los datos:', error);
       }
     );
   }
+  
 }

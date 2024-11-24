@@ -1,0 +1,24 @@
+<!-- clases.page.html -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Clases Disponibles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Lista de clases disponibles -->
+  <ion-list>
+    <ion-item *ngFor="let clase of clasesDisponibles">
+      <ion-label>
+        <h2>{{ clase.nombreClase }}</h2>
+        <p><strong>Profesor:</strong> {{ clase.profesor }}</p>
+        <p><strong>Estudiantes Inscritos:</strong></p>
+        <ul>
+          <li *ngFor="let estudiante of clase.estudiantes">{{ estudiante }}</li>
+        </ul>
+      </ion-label>
+      <!-- Botón para realizar alguna acción, por ejemplo, ver detalles -->
+      <ion-button [routerLink]="['/clases/detalles', clase.id]">Ver Detalles</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

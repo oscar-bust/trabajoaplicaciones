@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HorarioPage } from './horario.page';
+import { CrearSeccionPage } from './crear-seccion.page';
 
-describe('HorarioPage', () => {
-  let component: HorarioPage;
-  let fixture: ComponentFixture<HorarioPage>;
+describe('CrearSeccionPage', () => {
+  let component: CrearSeccionPage;
+  let fixture: ComponentFixture<CrearSeccionPage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HorarioPage);
+    fixture = TestBed.createComponent(CrearSeccionPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

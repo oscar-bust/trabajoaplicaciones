@@ -44,9 +44,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/scan/scan.module').then( m => m.ScanPageModule)
   },
   {
-    path: 'horario',
-    loadChildren: () => import('./horario/horario.module').then( m => m.HorarioPageModule)
+    path: 'crear-seccion',
+    loadChildren: () => import('./pages/crear-seccion/crear-seccion.module').then( m => m.CrearSeccionPageModule)
   },
+  {
+    path: 'clases',
+    loadChildren: () => import('./pages/clases/clases.module').then( m => m.ClasesModule)
+  },
+
   {
     path: '**', 
     redirectTo: 'error404', 
@@ -55,6 +60,14 @@ const routes: Routes = [
     path: 'error404',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
   },
+
+
+
+
+
+
+
+
 
 
  

@@ -29,18 +29,25 @@
 
   <div style="margin: 20px 0;"></div> 
 
-  <ion-button expand="full" (click)="toggleAlumnos()">Lista de Alumnos</ion-button>
+  <!-- Botón para ver la lista de alumnos, visible solo si el usuario es profesor -->
+  <ion-button *ngIf="tipoUsuario === 'profesor'" expand="full" (click)="toggleAlumnos()">Lista de Alumnos</ion-button>
 
+  <!-- Botón para generar o escanear el código QR dependiendo del tipo de usuario -->
   <ion-button (click)="mostrarOpciones()">
-   
-    {{ tipoUsuario === 'profesor' ? 'QR Generar Código QR' : 'Escanear Código QR' }}
+    {{ tipoUsuario === 'profesor' ? 'Generar Código QR' : 'Escanear Código QR' }}
   </ion-button>
-  
 
+  <!-- Botón para crear clases, solo visible si el tipo de usuario es profesor -->
+  <ion-button *ngIf="tipoUsuario === 'profesor'" expand="full" (click)="crearClase()">Crear Sección</ion-button>
+
+  <!-- Botón para ver clases disponibles, solo visible si el tipo de usuario es alumno -->
+  <ion-button *ngIf="tipoUsuario === 'alumno'" expand="full" (click)="verClasesDisponibles()">Ver Clases Disponibles</ion-button>
+
+  <!-- Lista de alumnos, visible solo si el tipo de usuario es profesor y se activa el toggle -->
   <ion-list *ngIf="mostrarAlumnos">
     <ion-item *ngFor="let alumno of usuarios">
       {{ alumno.name }} 
     </ion-item>
   </ion-list>
-</ion-content>
 
+</ion-content>

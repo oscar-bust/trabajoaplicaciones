@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HorarioPageRoutingModule } from './horario-routing.module';
+import { CrearSeccionPageRoutingModule } from './crear-seccion-routing.module';
 
-import { HorarioPage } from './horario.page';
+import { CrearSeccionPage } from './crear-seccion.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HorarioPageRoutingModule
+    CrearSeccionPageRoutingModule
   ],
-  declarations: [HorarioPage]
+  declarations: [CrearSeccionPage]
 })
-export class HorarioPageModule {}
+export class CrearSeccionPageModule {}
