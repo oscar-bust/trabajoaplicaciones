@@ -57,7 +57,7 @@ export class ProfesorPage implements OnInit {
   
 
   mostrarOpciones() {
-    // Dependiendo del tipo de usuario, redirige a una página diferente
+  
     if (this.tipoUsuario === 'profesor') {
       this.navCtrl.navigateForward('/generateqr');
     } else if (this.tipoUsuario === 'alumno') {
@@ -66,12 +66,12 @@ export class ProfesorPage implements OnInit {
   }
 
   toggleAlumnos() {
-    // Muestra u oculta la lista de alumnos
+
     this.mostrarAlumnos = !this.mostrarAlumnos;
   }
 
   async logout() {
-    // Cierra sesión y redirige al home
+
     localStorage.removeItem('usuarioActual');
     const alert = await this.alertController.create({
       header: 'Sesión cerrada',
@@ -94,7 +94,7 @@ export class ProfesorPage implements OnInit {
   // Método para ver clases disponibles, solo visible si el tipo de usuario es 'alumno'
   verClasesDisponibles() {
     if (this.tipoUsuario === 'alumno') {
-      this.navCtrl.navigateForward('/clase'); // Redirige a la página de clases
+      this.navCtrl.navigateForward('/clases'); 
     }
   }
 }
